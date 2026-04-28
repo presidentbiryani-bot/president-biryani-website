@@ -3,7 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>President Biryani – Royal Hyderabadi Tradition</title>
+<title>President Biryani Karimnagar | Best Hyderabadi Dum Biryani | 4 Branches</title>
+<meta name="description" content="President Biryani Karimnagar – Best Hyderabadi Dum Biryani with Home-Made Masala. 4 Branches in Karimnagar. Chicken Biryani from ₹139. Bulk Orders & Catering. Call 9391450453. Open till 2 AM!">
+<meta name="keywords" content="President Biryani Karimnagar, best biryani Karimnagar, Hyderabadi biryani Karimnagar, chicken biryani Karimnagar, biryani near me Karimnagar, dum biryani Karimnagar, catering Karimnagar, bulk biryani order Karimnagar, President Biryani Hanuman Nagar, President Biryani Housing Board, biryani takeaway Karimnagar">
+<meta name="author" content="President Biryani">
+<meta name="robots" content="index, follow">
+<meta name="geo.region" content="IN-TG">
+<meta name="geo.placename" content="Karimnagar">
+<meta name="geo.position" content="18.4386;79.1288">
+<meta name="ICBM" content="18.4386, 79.1288">
+
+<!-- Open Graph (for WhatsApp/Facebook sharing) -->
+<meta property="og:title" content="President Biryani Karimnagar | Best Hyderabadi Dum Biryani">
+<meta property="og:description" content="Best Hyderabadi Dum Biryani in Karimnagar. Home-Made Masala. 4 Branches. Chicken Biryani from ₹139. Open till 2 AM! Call 9391450453">
+<meta property="og:type" content="restaurant">
+<meta property="og:url" content="https://presidentbiryani.com">
+<meta property="og:locale" content="en_IN">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="President Biryani Karimnagar">
+<meta name="twitter:description" content="Best Hyderabadi Dum Biryani in Karimnagar. Open till 2 AM!">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://presidentbiryani.com">
+
+<!-- Schema.org structured data for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "President Biryani",
+  "description": "Best Hyderabadi Dum Biryani in Karimnagar with Home-Made Masala. 4 Branches. Bulk Orders and Catering available.",
+  "url": "https://presidentbiryani.com",
+  "telephone": "+919391450453",
+  "servesCuisine": ["Hyderabadi", "Indian", "Biryani"],
+  "priceRange": "₹99-₹4299",
+  "image": "https://presidentbiryani.com/logo.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Kothirampoor to Stadium Road, Hanuman Nagar",
+    "addressLocality": "Karimnagar",
+    "addressRegion": "Telangana",
+    "postalCode": "505001",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 18.4386,
+    "longitude": 79.1288
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "12:00",
+      "closes": "02:00"
+    }
+  ],
+  "hasMap": "https://www.google.com/maps/search/President+Biryani+Karimnagar",
+  "menu": "https://presidentbiryani.com/#menu",
+  "acceptsReservations": false,
+  "currenciesAccepted": "INR",
+  "paymentAccepted": "Cash, UPI",
+  "sameAs": [
+    "https://www.instagram.com/presidentbiryani"
+  ]
+}
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -544,6 +612,55 @@
   }
   .price-row .price { font-weight: 700; color: var(--red); font-size: 0.95rem; }
 
+
+  /* BRANCH CARDS */
+  .branches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .branch-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 16px;
+    padding: 1.4rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+
+  .branch-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.13); }
+
+  .branch-num { display: none; }
+
+  .branch-badge {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 1px;
+    color: #8B6000; background: #FFF3B0;
+    padding: 0.2rem 0.6rem; border-radius: 50px;
+    display: inline-block; width: fit-content;
+  }
+
+  .branch-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700; color: var(--text-dark);
+  }
+
+  .branch-addr {
+    font-size: 0.82rem; color: #6b4226; line-height: 1.6; flex: 1;
+  }
+
+  .branch-map-btn {
+    display: inline-block; margin-top: 0.5rem;
+    font-size: 0.78rem; font-weight: 600;
+    color: var(--red); text-decoration: none;
+    border: 1.5px solid var(--red);
+    padding: 0.35rem 0.9rem; border-radius: 50px;
+    transition: all 0.2s; width: fit-content;
+  }
+
+  .branch-map-btn:hover { background: var(--red); color: white; }
+
   /* WHATSAPP FLOAT */
   .wa-float {
     position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
@@ -654,6 +771,10 @@
           <div class="hero-stat-num">100%</div>
           <div class="hero-stat-label">Home Masala</div>
         </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-num" style="font-size:1.3rem;">2 AM</div>
+          <div class="hero-stat-label">Main Branch</div>
+        </div>
       </div>
       <div class="hero-ctas fade-up delay-3" style="margin-top:2rem;">
         <a href="https://wa.me/919391450453?text=Hi%20President%20Biryani!%20I%20would%20like%20to%20place%20an%20order%20🍛" class="btn-primary">💬 Order on WhatsApp</a>
@@ -672,6 +793,7 @@
 <div class="trust-strip">
   <div class="trust-item"><span class="trust-icon">🌶️</span> Home-Made Masala</div>
   <div class="trust-item"><span class="trust-icon">🔥</span> Authentic Dum Cooking</div>
+  <div class="trust-item"><span class="trust-icon">🕐</span> Main Branch Open Till 2 AM</div>
   <div class="trust-item"><span class="trust-icon">🚗</span> Take Away Available</div>
   <div class="trust-item"><span class="trust-icon">📦</span> Bulk Orders Welcome</div>
   <div class="trust-item"><span class="trust-icon">🍽️</span> Catering Service</div>
@@ -972,31 +1094,70 @@
   <div class="section-label">Find Us</div>
   <div class="section-title">Visit President Biryani</div>
 
-  <div class="map-info">
-    <div class="map-info-item">
-      <div class="map-info-icon">📍</div>
-      <div>
-        <div class="map-info-label">Address</div>
-        <div class="map-info-value">Opp. Sri Chaitanya Degree College<br>Mankamma Thota, Karimnagar<br>Telangana 505001</div>
+  <div class="map-info" style="flex-direction:column;gap:1.5rem;">
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;justify-content:space-between;">
+      <div class="map-info-item">
+        <div class="map-info-icon">📞</div>
+        <div>
+          <div class="map-info-label">Phone / WhatsApp</div>
+          <div class="map-info-value"><a href="tel:9391450453" style="color:var(--red);text-decoration:none;font-weight:600;">9391450453</a></div>
+        </div>
+      </div>
+      <div class="map-info-item">
+        <div class="map-info-icon">🕐</div>
+        <div>
+          <div class="map-info-label">Opening Hours</div>
+          <div class="map-info-value" style="color:var(--red);font-weight:700;">Main: 12 PM – 2 AM &nbsp;|&nbsp; Others: 12 PM – 11 PM</div>
+        </div>
+      </div>
+      <div class="map-info-item">
+        <div class="map-info-icon">🛵</div>
+        <div>
+          <div class="map-info-label">Services</div>
+          <div class="map-info-value">Take Away · Bulk Orders · Catering</div>
+        </div>
+      </div>
+      <a href="https://wa.me/919391450453?text=Hi%20President%20Biryani!%20I%20would%20like%20to%20place%20an%20order%20🍛" target="_blank" class="btn-primary">
+        💬 WhatsApp Order
+      </a>
+    </div>
+
+    <!-- BRANCH CARDS -->
+    <div class="branches-grid">
+      <div class="branch-card">
+        <div class="branch-num">01</div>
+        <div class="branch-badge">⭐ Main Branch</div>
+        <div class="branch-name">Hanuman Nagar</div>
+        <div class="branch-addr">Ground Floor, Kothirampoor to Stadium Road, Hanuman Nagar, Karimnagar 505001</div>
+        <div style="margin-top:0.4rem;font-size:0.8rem;font-weight:600;color:#C0111A;">🌙 Open till 3:00 AM Daily</div>
+        <div style="font-size:0.78rem;font-weight:700;color:#C0111A;margin-top:0.2rem;">🕐 12 PM – 2 AM ⭐</div>
+        <a href="https://www.google.com/maps/search/Hanuman+Nagar+Karimnagar+505001" target="_blank" class="branch-map-btn">📍 Get Directions</a>
+      </div>
+      <div class="branch-card">
+        <div class="branch-num">02</div>
+        <div class="branch-badge">🏪 Branch</div>
+        <div class="branch-name">Kattarampoor</div>
+        <div class="branch-addr">Tirumala Nagar, Karimnagar, Telangana 505001</div>
+        <div style="font-size:0.78rem;color:#666;margin-top:0.2rem;">🕐 12 PM – 11 PM</div>
+        <a href="https://www.google.com/maps/search/Tirumala+Nagar+Karimnagar+505001" target="_blank" class="branch-map-btn">📍 Get Directions</a>
+      </div>
+      <div class="branch-card">
+        <div class="branch-num">03</div>
+        <div class="branch-badge">🏪 Branch</div>
+        <div class="branch-name">Ramnagar</div>
+        <div class="branch-addr">Opp. Sri Chaitanya Degree College, Mankamma Thota, Karimnagar 505001</div>
+        <div style="font-size:0.78rem;color:#666;margin-top:0.2rem;">🕐 12 PM – 11 PM</div>
+        <a href="https://www.google.com/maps/search/Sri+Chaitanya+Degree+College+Mankamma+Thota+Karimnagar" target="_blank" class="branch-map-btn">📍 Get Directions</a>
+      </div>
+      <div class="branch-card">
+        <div class="branch-num">04</div>
+        <div class="branch-badge">🏪 Branch</div>
+        <div class="branch-name">Housing Board</div>
+        <div class="branch-addr">Karimnagar-Peddapalli Rd, Housing Board Colony, Karimnagar, Telangana 505001</div>
+        <div style="font-size:0.78rem;color:#666;margin-top:0.2rem;">🕐 12 PM – 11 PM</div>
+        <a href="https://www.google.com/maps/search/Housing+Board+Colony+Karimnagar+Peddapalli+Road" target="_blank" class="branch-map-btn">📍 Get Directions</a>
       </div>
     </div>
-    <div class="map-info-item">
-      <div class="map-info-icon">📞</div>
-      <div>
-        <div class="map-info-label">Phone / WhatsApp</div>
-        <div class="map-info-value"><a href="tel:9391450453" style="color:var(--red);text-decoration:none;font-weight:600;">9391450453</a></div>
-      </div>
-    </div>
-    <div class="map-info-item">
-      <div class="map-info-icon">🕐</div>
-      <div>
-        <div class="map-info-label">Orders</div>
-        <div class="map-info-value">Take Away · Bulk Orders · Catering</div>
-      </div>
-    </div>
-    <a href="https://wa.me/919391450453?text=Hi%20President%20Biryani!%20I%20would%20like%20to%20place%20an%20order%20🍛" target="_blank" class="btn-primary" style="align-self:center;">
-      💬 WhatsApp Order
-    </a>
   </div>
 
   <div class="map-wrapper">
@@ -1029,9 +1190,11 @@
       <ul>
         <li><a href="tel:9391450453">📞 9391450453</a></li>
         <li><a href="https://wa.me/919391450453" target="_blank">💬 WhatsApp Order</a></li>
-        <li style="color:rgba(255,255,255,0.5);font-size:0.85rem;margin-top:0.5rem;">Opp. Sri Chaitanya Degree College</li>
-        <li style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Mankamma Thota, Karimnagar</li>
-        <li style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Telangana 505001</li>
+        <li style="color:rgba(255,215,0,0.8);font-size:0.8rem;margin-top:0.5rem;font-weight:600;">4 Branches in Karimnagar</li>
+        <li style="color:rgba(255,255,255,0.5);font-size:0.8rem;">📍 Hanuman Nagar (Main)</li>
+        <li style="color:rgba(255,255,255,0.5);font-size:0.8rem;">📍 Kattarampoor</li>
+        <li style="color:rgba(255,255,255,0.5);font-size:0.8rem;">📍 Ramnagar</li>
+        <li style="color:rgba(255,255,255,0.5);font-size:0.8rem;">📍 Housing Board</li>
       </ul>
     </div>
   </div>
@@ -1273,8 +1436,18 @@ RESTAURANT INFO:
 - Name: President Biryani
 - Tagline: Royal Hyderabadi Tradition
 - Phone/WhatsApp: 9391450453
-- Address: Opp. Sri Chaitanya Degree College, Mankamma Thota, Karimnagar, Telangana 505001
 - Services: Take Away, Bulk Orders, Catering
+- Opening Hours:
+  * Main Branch (Hanuman Nagar): 12:00 PM – 2:00 AM (Next Day)
+  * Kattarampoor Branch: 12:00 PM – 11:00 PM
+  * Ramnagar Branch: 12:00 PM – 11:00 PM
+  * Housing Board Branch: 12:00 PM – 11:00 PM
+
+BRANCHES:
+1. Main Branch: Ground Floor, Kothirampoor to Stadium Road, Hanuman Nagar, Karimnagar 505001 — Open till 3:00 AM Daily
+2. Kattarampoor Branch: Tirumala Nagar, Karimnagar, Telangana 505001
+3. Ramnagar Branch: Opp. Sri Chaitanya Degree College, Mankamma Thota, Karimnagar 505001
+4. Housing Board Branch: Karimnagar-Peddapalli Rd, Housing Board Colony, Karimnagar, Telangana 505001
 
 MENU & PRICES:
 BIRYANI (Single/Plate 2 Person/Family 4 Person):
