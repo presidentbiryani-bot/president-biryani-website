@@ -1041,5 +1041,319 @@
   </div>
 </footer>
 
+<!-- AI CHAT WIDGET -->
+<style>
+  .chat-widget {
+    position: fixed; bottom: 2rem; left: 2rem; z-index: 1000;
+    display: flex; flex-direction: column; align-items: flex-start;
+  }
+
+  .chat-bubble-btn {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: linear-gradient(135deg, #C0111A, #8B0000);
+    border: 2px solid var(--yellow);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; cursor: pointer;
+    box-shadow: 0 4px 20px rgba(192,17,26,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: chatPulse 3s ease-in-out infinite;
+  }
+
+  .chat-bubble-btn:hover { transform: scale(1.1); }
+
+  @keyframes chatPulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(192,17,26,0.5); }
+    50% { box-shadow: 0 4px 30px rgba(192,17,26,0.8), 0 0 0 10px rgba(192,17,26,0.1); }
+  }
+
+  .chat-label {
+    background: #1a0a00; color: var(--yellow);
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 1px;
+    padding: 0.3rem 0.7rem; border-radius: 50px;
+    margin-top: 0.4rem; white-space: nowrap;
+    border: 1px solid rgba(255,215,0,0.3);
+  }
+
+  .chat-window {
+    display: none;
+    position: fixed; bottom: 7rem; left: 2rem;
+    width: 360px; height: 520px;
+    background: #fff; border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    flex-direction: column; overflow: hidden;
+    z-index: 1000;
+    animation: slideUp 0.3s ease;
+  }
+
+  .chat-window.open { display: flex; }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .chat-header {
+    background: linear-gradient(135deg, #C0111A, #8B0000);
+    padding: 1rem 1.2rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .chat-header-logo {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 2px solid var(--yellow);
+    object-fit: cover;
+  }
+
+  .chat-header-info { flex: 1; }
+  .chat-header-name { color: var(--yellow); font-weight: 700; font-size: 0.95rem; }
+  .chat-header-status { color: rgba(255,255,255,0.7); font-size: 0.72rem; }
+  .chat-status-dot {
+    width: 8px; height: 8px; background: #4ade80;
+    border-radius: 50%; display: inline-block; margin-right: 4px;
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .chat-close {
+    background: none; border: none; color: white;
+    font-size: 1.3rem; cursor: pointer; padding: 0 0.3rem;
+  }
+
+  .chat-messages {
+    flex: 1; overflow-y: auto; padding: 1rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    background: #fdf8f3;
+  }
+
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+
+  .msg {
+    max-width: 85%; padding: 0.65rem 0.9rem;
+    border-radius: 16px; font-size: 0.85rem; line-height: 1.5;
+    animation: msgIn 0.2s ease;
+  }
+
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .msg.bot {
+    background: white; color: #1a0a00;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    align-self: flex-start;
+  }
+
+  .msg.user {
+    background: linear-gradient(135deg, #C0111A, #8B0000);
+    color: white; border-bottom-right-radius: 4px;
+    align-self: flex-end;
+  }
+
+  .msg.typing {
+    background: white; color: #999;
+    align-self: flex-start;
+    font-style: italic; font-size: 0.8rem;
+  }
+
+  .chat-suggestions {
+    padding: 0.5rem 1rem; display: flex; gap: 0.4rem;
+    flex-wrap: wrap; background: #fdf8f3;
+    border-top: 1px solid #f0e8e0;
+  }
+
+  .suggestion-btn {
+    background: #fff3e0; border: 1px solid #ffcc80;
+    color: #8B0000; font-size: 0.72rem; font-weight: 600;
+    padding: 0.3rem 0.7rem; border-radius: 50px; cursor: pointer;
+    transition: all 0.2s; white-space: nowrap;
+  }
+
+  .suggestion-btn:hover { background: #C0111A; color: white; border-color: #C0111A; }
+
+  .chat-input-area {
+    display: flex; gap: 0.5rem; padding: 0.75rem 1rem;
+    border-top: 1px solid #eee; background: white;
+  }
+
+  .chat-input {
+    flex: 1; border: 1.5px solid #e0d0c0; border-radius: 50px;
+    padding: 0.5rem 1rem; font-size: 0.85rem; outline: none;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.2s;
+  }
+
+  .chat-input:focus { border-color: #C0111A; }
+
+  .chat-send {
+    background: linear-gradient(135deg, #C0111A, #8B0000);
+    border: none; color: white; width: 38px; height: 38px;
+    border-radius: 50%; cursor: pointer; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s;
+  }
+
+  .chat-send:hover { transform: scale(1.1); }
+
+  @media (max-width: 768px) {
+    .chat-window { width: calc(100vw - 2rem); left: 1rem; bottom: 6rem; height: 460px; }
+    .chat-widget { left: 1rem; bottom: 1rem; }
+  }
+</style>
+
+<div class="chat-widget">
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <img src="data:image/jpeg;base64,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" 
+           class="chat-header-logo" alt="President Biryani">
+      <div class="chat-header-info">
+        <div class="chat-header-name">President Biryani Assistant</div>
+        <div class="chat-header-status"><span class="chat-status-dot"></span>Online — Ask me anything!</div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg bot">
+        👋 Welcome to <strong>President Biryani!</strong><br><br>
+        I can help you with our menu, prices, location, bulk orders, and catering. What would you like to know? 🍛
+      </div>
+    </div>
+
+    <div class="chat-suggestions" id="suggestions">
+      <button class="suggestion-btn" onclick="askQuestion('What is your menu?')">📋 Menu</button>
+      <button class="suggestion-btn" onclick="askQuestion('What are your prices?')">💰 Prices</button>
+      <button class="suggestion-btn" onclick="askQuestion('Where are you located?')">📍 Location</button>
+      <button class="suggestion-btn" onclick="askQuestion('Do you offer catering?')">🎉 Catering</button>
+      <button class="suggestion-btn" onclick="askQuestion('How to order?')">🛒 Order</button>
+    </div>
+
+    <div class="chat-input-area">
+      <input type="text" class="chat-input" id="chatInput" 
+             placeholder="Ask about menu, prices, catering..." 
+             onkeypress="if(event.key==='Enter') sendMessage()">
+      <button class="chat-send" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+  <div class="chat-bubble-btn" onclick="toggleChat()">🍛</div>
+  <div class="chat-label">Ask Us Anything!</div>
+</div>
+
+<script>
+function toggleChat() {
+  const win = document.getElementById('chatWindow');
+  win.classList.toggle('open');
+  if (win.classList.contains('open')) {
+    document.getElementById('chatInput').focus();
+  }
+}
+
+function askQuestion(q) {
+  document.getElementById('chatInput').value = q;
+  sendMessage();
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+
+  addMessage(msg, 'user');
+  document.getElementById('suggestions').style.display = 'none';
+
+  const typingId = addMessage('Typing...', 'typing');
+
+  const systemPrompt = `You are a friendly customer assistant for President Biryani, a popular Hyderabadi restaurant in Karimnagar, Telangana, India.
+
+RESTAURANT INFO:
+- Name: President Biryani
+- Tagline: Royal Hyderabadi Tradition
+- Phone/WhatsApp: 9391450453
+- Address: Opp. Sri Chaitanya Degree College, Mankamma Thota, Karimnagar, Telangana 505001
+- Services: Take Away, Bulk Orders, Catering
+
+MENU & PRICES:
+BIRYANI (Single/Plate 2 Person/Family 4 Person):
+- HYD Chicken Dum Biryani: ₹139 / ₹269 / ₹538
+- Chicken Boneless Biryani: ₹199 / ₹389 / ₹778
+- Chicken Fry Biryani: ₹169 / ₹329 / ₹658
+- Spl Chicken Biryani: ₹179 / ₹349 / ₹698
+- Egg Biryani: ₹99 / ₹189 / ₹378
+
+JUMBO PACK (8 Person):
+- HYD Chicken Dum: ₹999, Boneless: ₹1499, Fry: ₹1299, Spl: ₹1349, Egg: ₹699
+
+PARTY PACK (12 Person):
+- HYD Chicken Dum: ₹1499, Boneless: ₹2229, Fry: ₹1899, Spl: ₹1949, Egg: ₹999
+
+GROUP PACK (24 Person):
+- HYD Chicken Dum: ₹2899, Boneless: ₹4299, Fry: ₹3699, Spl: ₹3749, Egg: ₹1899
+
+STARTERS (Plate 100gm / Full 200gm):
+- Chicken 65 Boneless: ₹99 / ₹189
+- Chicken Fry: ₹99 / ₹189
+- Chicken Popcorn: ₹99 / ₹189
+- Chicken Lollipop (3 pcs / 6 pcs): ₹99 / ₹189
+
+DESSERTS - Double Ka Meetha:
+- Single: ₹40, Plate: ₹70, Family: ₹130, Jumbo: ₹250, Party: ₹490
+
+CATERING: We undertake all catering orders — Kitty Parties, Anniversaries, Birthday Parties, Corporate Events, Weddings.
+
+HOW TO ORDER: Call or WhatsApp 9391450453
+
+Keep responses short, friendly, and helpful. Use emojis. Always end with an offer to help further or suggest calling 9391450453 for orders.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: msg }]
+      })
+    });
+
+    const data = await response.json();
+    removeMessage(typingId);
+    const reply = data.content?.[0]?.text || "Sorry, I couldn't get a response. Please call us at 9391450453! 📞";
+    addMessage(reply, 'bot');
+  } catch(e) {
+    removeMessage(typingId);
+    addMessage("Sorry, something went wrong! Please call us directly at 📞 9391450453 or WhatsApp us to place your order! 🍛", 'bot');
+  }
+
+  scrollToBottom();
+}
+
+let msgCounter = 0;
+function addMessage(text, type) {
+  const id = 'msg-' + (++msgCounter);
+  const div = document.createElement('div');
+  div.className = `msg ${type}`;
+  div.id = id;
+  div.innerHTML = text;
+  document.getElementById('chatMessages').appendChild(div);
+  scrollToBottom();
+  return id;
+}
+
+function removeMessage(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
+function scrollToBottom() {
+  const msgs = document.getElementById('chatMessages');
+  msgs.scrollTop = msgs.scrollHeight;
+}
+</script>
+
 </body>
 </html>
