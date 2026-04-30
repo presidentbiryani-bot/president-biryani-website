@@ -1316,8 +1316,17 @@ function joinLoyalty() {
   var name = document.getElementById('lf-name').value.trim();
   var phone = document.getElementById('lf-phone').value.trim().replace(/[^0-9]/g,'');
   var area = document.getElementById('lf-area').value.trim();
+
   if(!name || name.length < 2) { alert('Please enter your full name!'); return; }
   if(phone.length < 10) { alert('Please enter a valid 10-digit WhatsApp number!'); return; }
+
+  // Disable button to prevent double submit
+  var btn = document.querySelector('#lf-form-area button');
+  btn.innerText = '⏳ Saving...';
+  btn.style.animation = 'none';
+  btn.disabled = true;
+
+  // Animate stamps
   var ids = ['s1','s2','s3','s4','s5'];
   ids.forEach(function(id, i) {
     setTimeout(function() {
@@ -1328,24 +1337,37 @@ function joinLoyalty() {
       setTimeout(function(){ el.style.transform = 'scale(1)'; }, 200);
     }, i * 220);
   });
+
+  var date = new Date().toLocaleDateString('en-IN');
+
+  // Save to Google Sheets
+  fetch('https://script.google.com/macros/s/AKfycbxHT_V5lNb8nHi64IRZCMEoxaxH80R1OwsUrovy2HzGC2zpMjQKzEcogp2-f3cbtxJXzw/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: name,
+      phone: phone,
+      area: area || 'Not given',
+      date: date
+    })
+  }).then(function() {
+    console.log('Saved to Google Sheets!');
+  }).catch(function(err) {
+    console.log('Sheet error:', err);
+  });
+
+  // Send WhatsApp notification to owner
   setTimeout(function() {
     var msg = encodeURIComponent(
-      '🎉 *NEW LOYALTY MEMBER*
-
-👤 Name: ' + name +
-      '
-📞 Phone: ' + phone +
-      '
-📍 Area: ' + (area || 'Not given') +
-      '
-
-🏆 Stamps: 0/5
-🎁 5 orders = 1 Free Biryani
-📅 Joined: ' +
-      new Date().toLocaleDateString('en-IN') +
-      '
-
-_Save and track their stamps!_'
+      '🎉 *NEW LOYALTY MEMBER*\n\n' +
+      '👤 Name: ' + name + '\n' +
+      '📞 Phone: ' + phone + '\n' +
+      '📍 Area: ' + (area || 'Not given') + '\n\n' +
+      '🏆 Stamps: 0/5\n' +
+      '🎁 5 orders = 1 Free Biryani\n' +
+      '📅 Joined: ' + date + '\n\n' +
+      '_Saved to Google Sheets automatically!_'
     );
     window.open('https://wa.me/919391450453?text=' + msg, '_blank');
     document.getElementById('lf-form-area').style.display = 'none';
